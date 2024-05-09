@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:focusableInTouchMode="true">
+
+            <View
+                android:id="@+id/topView"
+                android:layout_width="0dp"
+                android:layout_height="150dp"
+                android:background="@color/colorAppPrimary"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+            <View
+                android:id="@+id/view5"
+                android:layout_width="0dp"
+                android:layout_height="100dp"
+                android:background="@drawable/icono_wave"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/topView" />
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/imageView5"
+                android:src="@drawable/logov2"
+                android:layout_width="130dp"
+                android:layout_height="130dp"
+                android:layout_marginTop="40dp"
+                android:contentDescription="@string/top_icon"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
+
+            <LinearLayout
+                android:id="@+id/linearLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginEnd="4dp"
+                android:gravity="center"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/view5" />
+
+
+            <LinearLayout
+                android:id="@+id/linearLayout2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:orientation="vertical"
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout"
+                tools:layout_editor_absoluteX="16dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/robotomedium"
+                    android:gravity="center"
+
+                    android:text="@string/descripcion_negocio"
+                    android:textColor="@color/colorNegro"
+                    android:textSize="22sp" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginTop="25dp"
+                    android:layout_marginRight="16dp"
+                    app:hintTextColor="@color/colorNegro">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/edtUsuario"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/edittext_redondo"
+                        android:drawableStart="@drawable/icono_usuario_gris"
+                        android:drawablePadding="10dp"
+                        android:fontFamily="@font/arthura_regular"
+                        android:hint="@string/usuario"
+                        android:inputType="text"
+                        android:maxLength="20"
+                        android:paddingStart="8dp"
+                        android:paddingEnd="8dp"
+                        android:textColor="@color/colorNegro"
+                        android:textSize="14sp"
+                        tools:ignore="Autofill,TouchTargetSizeCheck" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginRight="16dp"
+                    app:hintTextColor="@color/colorNegro">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/edtPassword"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/edittext_redondo"
+                        android:drawableStart="@drawable/icono_candado_gris"
+                        android:drawablePadding="10dp"
+                        android:fontFamily="@font/arthura_regular"
+                        android:hint="@string/contrasena"
+                        android:inputType="text"
+                        android:maxLength="16"
+                        android:paddingStart="8dp"
+                        android:paddingEnd="8dp"
+                        android:textColor="@color/colorNegro"
+                        android:textSize="14sp"
+                        tools:ignore="Autofill,TouchTargetSizeCheck" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/txtRegistro"
+                android:layout_width="match_parent"
+                android:layout_height="28dp"
+                android:layout_marginTop="35dp"
+                android:layout_marginBottom="25dp"
+                android:gravity="center"
+                android:text="@string/registrarse"
+                android:textColor="@color/colorPrimary"
+                android:textSize="20sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/btnIngresar" />
+
+
+            <Button
+                android:id="@+id/btnIngresar"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_gravity="center"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="35dp"
+                android:layout_marginEnd="16dp"
+                android:background="@drawable/button_corner_color"
+                android:text="@string/ingresar"
+                android:textColor="@color/colorBlanco"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+
+</RelativeLayout>
+

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorCremaV1">
+
+    <include
+        android:id="@+id/libreria"
+        layout="@layout/toolbar_menu"></include>
+
+    <LinearLayout
+        android:id="@+id/contenedor"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/libreria"
+        android:layout_centerVertical="true"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:visibility="visible">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="14dp" />
+
+    </LinearLayout>
+</RelativeLayout>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorGris">#656565</color>
+
+    <color name="colorPrimary">#673AB7</color>
+    <color name="colorAppPrimary">#512DA8</color>
+    <color name="colorAppLight">#E040FB</color>
+
+    <color name="colorBlanco">#FFFFFFFF</color>
+    <color name="colorSplash">#ff6f00</color>
+    <color name="colorNegro">#FF000000</color>
+
+    <color name="tab_indicator_gray">#c0c0c0</color>
+    <color name="intro_title_color">#000000</color>
+    <color name="intro_description_color">#656565</color>
+    <color name="gradient_start_color">#4c84ff</color>
+    <color name="gradient_end_color">#18a3fe</color>
+
+    <color name="colorRedondeadoGris">#f1f1f3</color>
+
+    <color name="colorRojo">#C8FF0000</color>
+    <color name="colorVerde">#4CAF50</color>
+    <color name="colorCerradoTransparente">#A6818181</color>
+    <color name="colorRojoCarrito">#C8FF0000</color>
+
+    <color name="colorCremaV1">#fffff4</color>
+    <color name="colorCerrado">#ff6f60</color>
+
+
+    <color name="barraProgreso">#ff3d4d</color>
+    <color name="verdeSuccess">#A5DC86</color>
+    <color name="gris616161">#616161</color>
+    <color name="grisAAA">#aaa</color>
+
+
+
+</resources>

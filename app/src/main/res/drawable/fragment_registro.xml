@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:orientation="vertical">
+
+            <View
+                android:id="@+id/view5"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:background="@drawable/icono_wave"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/topView" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/crear_una_cuenta"
+                android:textAlignment="center"
+                android:fontFamily="@font/robotomedium"
+                android:textColor="@color/colorNegro"
+                android:textSize="22sp"
+                android:textStyle="bold" />
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilUsuario"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="8dp"
+                app:hintTextColor="@color/colorNegro">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/edtUsuario"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/edittext_redondo"
+                    android:drawableStart="@drawable/icono_usuario_gris"
+                    android:drawablePadding="10dp"
+                    android:fontFamily="@font/arthura_regular"
+                    android:hint="@string/usuario"
+                    android:inputType="text"
+                    android:maxLength="20"
+                    android:paddingStart="8dp"
+                    android:paddingEnd="8dp"
+                    android:textColor="@color/colorNegro"
+                    android:textSize="14sp"
+                    tools:ignore="Autofill" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="8dp"
+                app:hintTextColor="@color/colorNegro"
+                app:passwordToggleEnabled="true">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/edtPassword"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/edittext_redondo"
+                    android:drawableStart="@drawable/icono_candado_gris"
+                    android:drawablePadding="10dp"
+                    android:fontFamily="@font/arthura_regular"
+                    android:hint="@string/contrasena"
+                    android:inputType="textPassword"
+                    android:maxLength="16"
+                    android:paddingStart="8dp"
+                    android:paddingEnd="8dp"
+                    android:textColor="@color/colorNegro"
+                    android:textSize="14sp"
+                    tools:ignore="Autofill" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:layout_marginTop="14dp"
+                android:fontFamily="@font/arthura_regular"
+                android:text="@string/nota_minimo_4_caracteres"
+                android:textColor="@color/colorGris"
+                android:textSize="16sp" />
+
+
+            <Button
+                android:id="@+id/btnRegistrarse"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="32dp"
+                android:layout_marginTop="40dp"
+                android:layout_marginRight="32dp"
+                android:layout_marginBottom="30dp"
+                android:background="@drawable/button_corner_color"
+                android:text="@string/registrarse"
+                android:textColor="@color/colorBlanco" />
+
+        </LinearLayout>
+    </ScrollView>
+
+</RelativeLayout>
