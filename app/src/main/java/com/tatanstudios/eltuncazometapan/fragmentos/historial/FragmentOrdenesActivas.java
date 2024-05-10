@@ -44,7 +44,7 @@ public class FragmentOrdenesActivas extends Fragment {
     private CompositeDisposable compositeDisposable = new CompositeDisposable();
     private OrdenesActivasAdapter adapter;
 
-    boolean unaVez = false;
+    private boolean unaVez = false;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -119,7 +119,7 @@ public class FragmentOrdenesActivas extends Fragment {
         );
     }
 
-    ActivityResultLauncher<Intent> someActivityResultLauncher = registerForActivityResult(
+    private ActivityResultLauncher<Intent> someActivityResultLauncher = registerForActivityResult(
             new ActivityResultContracts.StartActivityForResult(),
             result -> {
                 if (result.getResultCode() == Activity.RESULT_OK) {
@@ -134,7 +134,7 @@ public class FragmentOrdenesActivas extends Fragment {
         someActivityResultLauncher.launch(res);
     }
 
-    void mensajeSinConexion(){
+    private void mensajeSinConexion(){
         progressBar.setVisibility(View.GONE);
         Toasty.info(getActivity(), getString(R.string.sin_conexion)).show();
     }

@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
+import android.os.Handler;
 import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -95,37 +96,46 @@ public class FragmentRegistro extends Fragment {
         alertaPregunta();
     }
 
+    private boolean seguroKalert = true;
+
     private void alertaPregunta(){
 
-        int colorVerdeSuccess = ContextCompat.getColor(requireContext(), R.color.verdeSuccess);
-        KAlertDialog pDialog = new KAlertDialog(getContext(), KAlertDialog.SUCCESS_TYPE, false);
-        pDialog.getProgressHelper().setBarColor(colorVerdeSuccess);
+        if(seguroKalert){
+            seguroKalert = false;
+            new Handler().postDelayed(() -> {
+                seguroKalert = true;
+            }, 1000);
 
-        pDialog.setTitleText(getString(R.string.registrarse));
-        pDialog.setTitleTextGravity(Gravity.CENTER);
-        pDialog.setTitleTextSize(19);
+            int colorVerdeSuccess = ContextCompat.getColor(requireContext(), R.color.verdeSuccess);
+            KAlertDialog pDialog = new KAlertDialog(getContext(), KAlertDialog.SUCCESS_TYPE, false);
+            pDialog.getProgressHelper().setBarColor(colorVerdeSuccess);
 
-        pDialog.setContentTextAlignment(View.TEXT_ALIGNMENT_VIEW_START, Gravity.CENTER);
-        pDialog.setContentTextSize(17);
-        pDialog.setContentText(getString(R.string.completar_registro));
+            pDialog.setTitleText(getString(R.string.registrarse));
+            pDialog.setTitleTextGravity(Gravity.CENTER);
+            pDialog.setTitleTextSize(19);
 
-        pDialog.setCancelable(false);
-        pDialog.setCanceledOnTouchOutside(false);
+            pDialog.setContentTextAlignment(View.TEXT_ALIGNMENT_CENTER, Gravity.CENTER);
+            pDialog.setContentTextSize(17);
+            pDialog.setContentText(getString(R.string.completar_registro));
 
-        pDialog.confirmButtonColor(R.drawable.codigo_kalert_dialog_corners_confirmar);
-        pDialog.setConfirmClickListener(getString(R.string.enviar), sDialog -> {
-            sDialog.dismissWithAnimation();
+            pDialog.setCancelable(false);
+            pDialog.setCanceledOnTouchOutside(false);
 
-            peticionServidor();
-        });
+            pDialog.confirmButtonColor(R.drawable.codigo_kalert_dialog_corners_confirmar);
+            pDialog.setConfirmClickListener(getString(R.string.enviar), sDialog -> {
+                sDialog.dismissWithAnimation();
 
-        pDialog.cancelButtonColor(R.drawable.codigo_kalert_dialog_corners_cancelar);
-        pDialog.setCancelClickListener(getString(R.string.cancelar), sDialog -> {
-            sDialog.dismissWithAnimation();
+                peticionServidor();
+            });
 
-        });
+            pDialog.cancelButtonColor(R.drawable.codigo_kalert_dialog_corners_cancelar);
+            pDialog.setCancelClickListener(getString(R.string.cancelar), sDialog -> {
+                sDialog.dismissWithAnimation();
 
-        pDialog.show();
+            });
+
+            pDialog.show();
+        }
     }
 
     private void peticionServidor(){
@@ -181,7 +191,7 @@ public class FragmentRegistro extends Fragment {
         pDialog.setTitleTextGravity(Gravity.CENTER);
         pDialog.setTitleTextSize(19);
 
-        pDialog.setContentTextAlignment(View.TEXT_ALIGNMENT_VIEW_START, Gravity.CENTER);
+        pDialog.setContentTextAlignment(View.TEXT_ALIGNMENT_CENTER, Gravity.CENTER);
         pDialog.setContentTextSize(17);
         pDialog.setContentText(texto);
 

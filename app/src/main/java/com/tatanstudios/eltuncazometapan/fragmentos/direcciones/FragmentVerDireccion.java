@@ -149,7 +149,7 @@ public class FragmentVerDireccion extends Fragment {
             pDialog.setTitleTextSize(19);
             pDialog.setContentText("");
 
-            pDialog.setContentTextAlignment(View.TEXT_ALIGNMENT_VIEW_START, Gravity.CENTER);
+            pDialog.setContentTextAlignment(View.TEXT_ALIGNMENT_CENTER, Gravity.CENTER);
             pDialog.setContentTextSize(17);
 
             pDialog.setCancelable(false);
@@ -217,7 +217,7 @@ public class FragmentVerDireccion extends Fragment {
         pDialog.setTitleTextSize(19);
         pDialog.setContentText(getString(R.string.se_requiere_minimo));
 
-        pDialog.setContentTextAlignment(View.TEXT_ALIGNMENT_VIEW_START, Gravity.CENTER);
+        pDialog.setContentTextAlignment(View.TEXT_ALIGNMENT_CENTER, Gravity.CENTER);
         pDialog.setContentTextSize(17);
 
         pDialog.setCancelable(false);

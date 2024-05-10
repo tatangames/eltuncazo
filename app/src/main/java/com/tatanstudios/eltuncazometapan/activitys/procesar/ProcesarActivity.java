@@ -3,6 +3,7 @@ package com.tatanstudios.eltuncazometapan.activitys.procesar;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.Gravity;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -50,6 +51,7 @@ public class ProcesarActivity extends AppCompatActivity {
     private int minimo = 0;
     private String minimoConsumo = "";
 
+    private boolean boolSeguroConfirmar = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -95,7 +97,7 @@ public class ProcesarActivity extends AppCompatActivity {
             pDialog.setTitleTextSize(19);
             pDialog.setContentText(minimoConsumo);
 
-            pDialog.setContentTextAlignment(View.TEXT_ALIGNMENT_VIEW_START, Gravity.CENTER);
+            pDialog.setContentTextAlignment(View.TEXT_ALIGNMENT_CENTER, Gravity.CENTER);
             pDialog.setContentTextSize(17);
 
             pDialog.setCancelable(false);
@@ -116,34 +118,43 @@ public class ProcesarActivity extends AppCompatActivity {
 
     private void confirmarPregunta(){
 
-        int colorVerdeSuccess = ContextCompat.getColor(this, R.color.verdeSuccess);
-        KAlertDialog pDialog = new KAlertDialog(this, KAlertDialog.SUCCESS_TYPE, false);
-        pDialog.getProgressHelper().setBarColor(colorVerdeSuccess);
+        if(boolSeguroConfirmar){
+            boolSeguroConfirmar = false;
 
-        pDialog.setTitleText(getString(R.string.confirmar_orden));
-        pDialog.setTitleTextGravity(Gravity.CENTER);
-        pDialog.setTitleTextSize(19);
-        pDialog.setContentText("");
+            new Handler().postDelayed(() -> {
+                boolSeguroConfirmar = true;
+            }, 1000);
 
-        pDialog.setContentTextAlignment(View.TEXT_ALIGNMENT_VIEW_START, Gravity.CENTER);
-        pDialog.setContentTextSize(17);
 
-        pDialog.setCancelable(false);
-        pDialog.setCanceledOnTouchOutside(false);
+            int colorVerdeSuccess = ContextCompat.getColor(this, R.color.verdeSuccess);
+            KAlertDialog pDialog = new KAlertDialog(this, KAlertDialog.SUCCESS_TYPE, false);
+            pDialog.getProgressHelper().setBarColor(colorVerdeSuccess);
 
-        pDialog.confirmButtonColor(R.drawable.codigo_kalert_dialog_corners_confirmar);
-        pDialog.setConfirmClickListener(getString(R.string.aceptar), sDialog -> {
-            sDialog.dismissWithAnimation();
-            peticionEnviarOrden();
-        });
+            pDialog.setTitleText(getString(R.string.confirmar_orden));
+            pDialog.setTitleTextGravity(Gravity.CENTER);
+            pDialog.setTitleTextSize(19);
+            pDialog.setContentText("");
 
-        pDialog.cancelButtonColor(R.drawable.codigo_kalert_dialog_corners_cancelar);
-        pDialog.setCancelClickListener(getString(R.string.cancelar), sDialog -> {
-            sDialog.dismissWithAnimation();
+            pDialog.setContentTextAlignment(View.TEXT_ALIGNMENT_CENTER, Gravity.CENTER);
+            pDialog.setContentTextSize(17);
 
-        });
+            pDialog.setCancelable(false);
+            pDialog.setCanceledOnTouchOutside(false);
 
-        pDialog.show();
+            pDialog.confirmButtonColor(R.drawable.codigo_kalert_dialog_corners_confirmar);
+            pDialog.setConfirmClickListener(getString(R.string.aceptar), sDialog -> {
+                sDialog.dismissWithAnimation();
+                peticionEnviarOrden();
+            });
+
+            pDialog.cancelButtonColor(R.drawable.codigo_kalert_dialog_corners_cancelar);
+            pDialog.setCancelClickListener(getString(R.string.cancelar), sDialog -> {
+                sDialog.dismissWithAnimation();
+
+            });
+
+            pDialog.show();
+        }
     }
 
 
@@ -279,7 +290,7 @@ public class ProcesarActivity extends AppCompatActivity {
         pDialog.setTitleTextSize(19);
         pDialog.setContentText(nota);
 
-        pDialog.setContentTextAlignment(View.TEXT_ALIGNMENT_VIEW_START, Gravity.CENTER);
+        pDialog.setContentTextAlignment(View.TEXT_ALIGNMENT_CENTER, Gravity.CENTER);
         pDialog.setContentTextSize(17);
 
         pDialog.setCancelable(false);
@@ -305,7 +316,7 @@ public class ProcesarActivity extends AppCompatActivity {
         pDialog.setTitleTextSize(19);
         pDialog.setContentText(mensaje);
 
-        pDialog.setContentTextAlignment(View.TEXT_ALIGNMENT_VIEW_START, Gravity.CENTER);
+        pDialog.setContentTextAlignment(View.TEXT_ALIGNMENT_CENTER, Gravity.CENTER);
         pDialog.setContentTextSize(17);
 
         pDialog.setCancelable(false);

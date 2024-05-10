@@ -114,7 +114,7 @@ public class MapaActivity extends AppCompatActivity implements OnMapReadyCallbac
             pDialog.setTitleTextSize(19);
             pDialog.setContentText(getString(R.string.el_servicio_sera));
 
-            pDialog.setContentTextAlignment(View.TEXT_ALIGNMENT_VIEW_START, Gravity.CENTER);
+            pDialog.setContentTextAlignment(View.TEXT_ALIGNMENT_CENTER, Gravity.CENTER);
             pDialog.setContentTextSize(17);
 
             pDialog.setCancelable(false);
@@ -251,7 +251,7 @@ public class MapaActivity extends AppCompatActivity implements OnMapReadyCallbac
             pDialog.setTitleTextSize(19);
             pDialog.setContentText(getString(R.string.lo_sentimos_no_ofrecemos_nuestro));
 
-            pDialog.setContentTextAlignment(View.TEXT_ALIGNMENT_VIEW_START, Gravity.CENTER);
+            pDialog.setContentTextAlignment(View.TEXT_ALIGNMENT_CENTER, Gravity.CENTER);
             pDialog.setContentTextSize(17);
 
             pDialog.setCancelable(false);

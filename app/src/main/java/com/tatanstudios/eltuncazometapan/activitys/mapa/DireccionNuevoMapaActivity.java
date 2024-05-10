@@ -3,6 +3,7 @@ package com.tatanstudios.eltuncazometapan.activitys.mapa;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.View;
@@ -84,7 +85,6 @@ public class DireccionNuevoMapaActivity extends AppCompatActivity {
         txtToolbar = findViewById(R.id.txtToolbar);
         root = findViewById(R.id.root);
 
-
         Intent intent = getIntent();
         if (intent != null) {
             idzona = intent.getStringExtra("KEY_ZONA");
@@ -109,7 +109,7 @@ public class DireccionNuevoMapaActivity extends AppCompatActivity {
     }
 
 
-    void campos(){
+    private void campos(){
         nombre = edtNombre.getText().toString();
         direccion = edtDireccion.getText().toString();
         puntoref = edtPunto.getText().toString();
@@ -130,39 +130,49 @@ public class DireccionNuevoMapaActivity extends AppCompatActivity {
         guardarDireccion();
     }
 
-    void guardarDireccion(){
+    private boolean seguroKalert = true;
 
-        int colorVerdeSuccess = ContextCompat.getColor(this, R.color.verdeSuccess);
-        KAlertDialog pDialog = new KAlertDialog(this, KAlertDialog.WARNING_TYPE, false);
-        pDialog.getProgressHelper().setBarColor(colorVerdeSuccess);
+    private void guardarDireccion(){
 
-        pDialog.setTitleText(getString(R.string.guardar_direccion));
-        pDialog.setTitleTextGravity(Gravity.CENTER);
-        pDialog.setTitleTextSize(19);
-        pDialog.setContentText("");
+        if(seguroKalert){
+            seguroKalert = false;
+            new Handler().postDelayed(() -> {
+                seguroKalert = true;
+            }, 1000);
 
-        pDialog.setContentTextAlignment(View.TEXT_ALIGNMENT_VIEW_START, Gravity.CENTER);
-        pDialog.setContentTextSize(17);
+            int colorVerdeSuccess = ContextCompat.getColor(this, R.color.verdeSuccess);
+            KAlertDialog pDialog = new KAlertDialog(this, KAlertDialog.WARNING_TYPE, false);
+            pDialog.getProgressHelper().setBarColor(colorVerdeSuccess);
 
-        pDialog.setCancelable(false);
-        pDialog.setCanceledOnTouchOutside(false);
+            pDialog.setTitleText(getString(R.string.guardar_direccion));
+            pDialog.setTitleTextGravity(Gravity.CENTER);
+            pDialog.setTitleTextSize(19);
+            pDialog.setContentText("");
 
-        pDialog.confirmButtonColor(R.drawable.codigo_kalert_dialog_corners_confirmar);
-        pDialog.setConfirmClickListener(getString(R.string.si), sDialog -> {
-            sDialog.dismissWithAnimation();
-            peticionGuardar();
-        });
+            pDialog.setContentTextAlignment(View.TEXT_ALIGNMENT_CENTER, Gravity.CENTER);
+            pDialog.setContentTextSize(17);
 
-        pDialog.cancelButtonColor(R.drawable.codigo_kalert_dialog_corners_cancelar);
-        pDialog.setCancelClickListener(getString(R.string.cancelar), sDialog -> {
-            sDialog.dismissWithAnimation();
+            pDialog.setCancelable(false);
+            pDialog.setCanceledOnTouchOutside(false);
 
-        });
+            pDialog.confirmButtonColor(R.drawable.codigo_kalert_dialog_corners_confirmar);
+            pDialog.setConfirmClickListener(getString(R.string.si), sDialog -> {
+                sDialog.dismissWithAnimation();
+                peticionGuardar();
+            });
 
-        pDialog.show();
+            pDialog.cancelButtonColor(R.drawable.codigo_kalert_dialog_corners_cancelar);
+            pDialog.setCancelClickListener(getString(R.string.cancelar), sDialog -> {
+                sDialog.dismissWithAnimation();
+
+            });
+
+            pDialog.show();
+        }
+
     }
 
-    void peticionGuardar(){
+    private void peticionGuardar(){
         if(seguroGuardar){
             seguroGuardar = false;
 
@@ -196,8 +206,7 @@ public class DireccionNuevoMapaActivity extends AppCompatActivity {
         }
     }
 
-    void direccionGuardadada(){
-
+    private void direccionGuardadada(){
 
         int colorVerdeSuccess = ContextCompat.getColor(this, R.color.verdeSuccess);
         KAlertDialog pDialog = new KAlertDialog(this, KAlertDialog.SUCCESS_TYPE, false);
@@ -208,7 +217,7 @@ public class DireccionNuevoMapaActivity extends AppCompatActivity {
         pDialog.setTitleTextSize(19);
         pDialog.setContentText(getString(R.string.la_nueva_direccion));
 
-        pDialog.setContentTextAlignment(View.TEXT_ALIGNMENT_VIEW_START, Gravity.CENTER);
+        pDialog.setContentTextAlignment(View.TEXT_ALIGNMENT_CENTER, Gravity.CENTER);
         pDialog.setContentTextSize(17);
 
         pDialog.setCancelable(false);
@@ -226,7 +235,7 @@ public class DireccionNuevoMapaActivity extends AppCompatActivity {
     }
 
     // cierra el teclado
-    void cerrarTeclado() {
+    private void cerrarTeclado() {
         View view = this.getCurrentFocus();
         if (view != null) {
             InputMethodManager imm = (InputMethodManager) this.getSystemService(Context.INPUT_METHOD_SERVICE);
@@ -234,7 +243,7 @@ public class DireccionNuevoMapaActivity extends AppCompatActivity {
         }
     }
 
-    void mensajeSinConexion(){
+    private void mensajeSinConexion(){
         progressBar.setVisibility(View.GONE);
         Toasty.info(DireccionNuevoMapaActivity.this, getString(R.string.sin_conexion)).show();
     }

@@ -5,6 +5,7 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.Gravity;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -59,21 +60,17 @@ public class OrdenesEstadoActivasActivity extends AppCompatActivity {
     private ImageView imgEstado1;
     private ImageView imgEstado2;
     private SwipeRefreshLayout refresh;
-    private Dialog miDialogoCalificar;
-    private Button btnEnviar;
-    private float estrellas = 1;
+    private float estrellas = 5;
 
     private RequestOptions opcionesGlide = new RequestOptions()
             .diskCacheStrategy(DiskCacheStrategy.NONE)
             .skipMemoryCache(true)
             .priority(Priority.NORMAL);
 
-    private boolean boolOrdenCancelada = false;
 
     private ApiService service;
     private ProgressBar progressBar;
     private CompositeDisposable compositeDisposable = new CompositeDisposable();
-    private TextInputEditText edtNotaCalificatoria;
 
 
     @Override
@@ -111,7 +108,7 @@ public class OrdenesEstadoActivasActivity extends AppCompatActivity {
         root.addView(progressBar, params);
 
         txtVerProducto.setOnClickListener(v -> verProductos());
-        btnCompletar.setOnClickListener(v ->calificar());
+        btnCompletar.setOnClickListener(v ->peticionEnviarCalificacion());
         btnCancelar.setOnClickListener(v ->cancelarOrden());
 
         peticionServidor();
@@ -119,7 +116,7 @@ public class OrdenesEstadoActivasActivity extends AppCompatActivity {
     }
 
     // informacion de la orden
-    void peticionServidor(){
+    private void peticionServidor(){
         refresh.setRefreshing(true);
         progressBar.setVisibility(View.VISIBLE);
         compositeDisposable.add(
@@ -171,7 +168,6 @@ public class OrdenesEstadoActivasActivity extends AppCompatActivity {
 
                                                 if(m.getEstadocancelada() == 1){
 
-                                                    boolOrdenCancelada = true;
 
                                                     txtEstadoOrden.setText(getString(R.string.orden_cancelada));
                                                     txtEstadoOrdenMensaje.setText("");
@@ -212,39 +208,55 @@ public class OrdenesEstadoActivasActivity extends AppCompatActivity {
         );
     }
 
+    private boolean seguroCancel = true;
+
     // mensaje para cancelar orden
-    void cancelarOrden(){
+    private void cancelarOrden(){
 
-        int colorVerdeSuccess = ContextCompat.getColor(this, R.color.verdeSuccess);
-        KAlertDialog pDialog = new KAlertDialog(this, KAlertDialog.WARNING_TYPE, false);
-        pDialog.getProgressHelper().setBarColor(colorVerdeSuccess);
+        if(seguroCancel){
 
-        pDialog.setTitleText(getString(R.string.cancelar_orden));
-        pDialog.setTitleTextGravity(Gravity.CENTER);
-        pDialog.setTitleTextSize(19);
-        pDialog.setContentText("");
+            seguroCancel = false;
 
-        pDialog.setContentTextAlignment(View.TEXT_ALIGNMENT_VIEW_START, Gravity.CENTER);
-        pDialog.setContentTextSize(17);
-
-        pDialog.setCancelable(false);
-        pDialog.setCanceledOnTouchOutside(false);
-
-        pDialog.confirmButtonColor(R.drawable.codigo_kalert_dialog_corners_confirmar);
-        pDialog.setConfirmClickListener(getString(R.string.aceptar), sDialog -> {
-            sDialog.dismissWithAnimation();
-            peticionCancelar();
-        });
-
-        pDialog.show();
+            new Handler().postDelayed(() -> {
+                seguroCancel = true;
+            }, 1000);
 
 
+            int colorVerdeSuccess = ContextCompat.getColor(this, R.color.verdeSuccess);
+            KAlertDialog pDialog = new KAlertDialog(this, KAlertDialog.WARNING_TYPE, false);
+            pDialog.getProgressHelper().setBarColor(colorVerdeSuccess);
+
+            pDialog.setTitleText(getString(R.string.cancelar_orden));
+            pDialog.setTitleTextGravity(Gravity.CENTER);
+            pDialog.setTitleTextSize(19);
+            pDialog.setContentText("");
+
+            pDialog.setContentTextAlignment(View.TEXT_ALIGNMENT_CENTER, Gravity.CENTER);
+            pDialog.setContentTextSize(17);
+
+            pDialog.setCancelable(false);
+            pDialog.setCanceledOnTouchOutside(false);
+
+            pDialog.confirmButtonColor(R.drawable.codigo_kalert_dialog_corners_confirmar);
+            pDialog.setConfirmClickListener(getString(R.string.si), sDialog -> {
+                sDialog.dismissWithAnimation();
+                peticionCancelar();
+            });
+
+            pDialog.cancelButtonColor(R.drawable.codigo_kalert_dialog_corners_cancelar);
+            pDialog.setCancelClickListener(getString(R.string.cancelar), sDialog -> {
+                sDialog.dismissWithAnimation();
+
+            });
+
+            pDialog.show();
+        }
 
     }
 
 
     // cancelar la orden
-    void peticionCancelar(){
+    private void peticionCancelar(){
         progressBar.setVisibility(View.VISIBLE);
         compositeDisposable.add(
                 service.cancelarOrden(ordenid)
@@ -277,84 +289,16 @@ public class OrdenesEstadoActivasActivity extends AppCompatActivity {
         );
     }
 
-    // calificaciones de motorista
-    void calificar(){
 
-
-        if(boolOrdenCancelada){
-            peticionEnviarCalificacion("");
-        }else{
-            /*miDialogoCalificar = new Dialog(this, android.R.style.Theme_Black_NoTitleBar_Fullscreen);
-
-            miDialogoCalificar.setContentView(R.layout.vista_calificacion_motorista);
-
-            edtNotaCalificatoria = miDialogoCalificar.findViewById(R.id.edtNombre);
-            btnEnviar = miDialogoCalificar.findViewById(R.id.btnEnviar);
-            ratingBar = miDialogoCalificar.findViewById(R.id.ratingBar);
-
-            btnEnviar.setOnClickListener(v ->mensajeCalificacion());
-
-            ratingBar.setOnRatingBarChangeListener((ratingBar, valor, b) -> estrellas = valor);
-
-            miDialogoCalificar.show();*/
-        }
-    }
-
-    // verificar
-    void mensajeCalificacion(){
-
-        if(estrellas == 0){
-            estrellas = 1;
-        }
-
-
-        int colorVerdeSuccess = ContextCompat.getColor(this, R.color.verdeSuccess);
-        KAlertDialog pDialog = new KAlertDialog(this, KAlertDialog.SUCCESS_TYPE, false);
-        pDialog.getProgressHelper().setBarColor(colorVerdeSuccess);
-
-        pDialog.setTitleText(getString(R.string.enviar_calificacion));
-        pDialog.setTitleTextGravity(Gravity.CENTER);
-        pDialog.setTitleTextSize(19);
-        pDialog.setContentText("");
-
-        pDialog.setContentTextAlignment(View.TEXT_ALIGNMENT_VIEW_START, Gravity.CENTER);
-        pDialog.setContentTextSize(17);
-
-        pDialog.setCancelable(false);
-        pDialog.setCanceledOnTouchOutside(false);
-
-        pDialog.confirmButtonColor(R.drawable.codigo_kalert_dialog_corners_confirmar);
-        pDialog.setConfirmClickListener(getString(R.string.aceptar), sDialog -> {
-            sDialog.dismissWithAnimation();
-            String notas = edtNotaCalificatoria.getText().toString();
-
-            peticionEnviarCalificacion(notas);
-        });
-
-        pDialog.cancelButtonColor(R.drawable.codigo_kalert_dialog_corners_cancelar);
-        pDialog.setCancelClickListener(getString(R.string.cancelar), sDialog -> {
-            sDialog.dismissWithAnimation();
-
-        });
-
-        pDialog.show();
-
-
-
-
-    }
 
     // enviar calificacion de motorista
-    void peticionEnviarCalificacion(String notas){
-        if(miDialogoCalificar != null) {
-            miDialogoCalificar.dismiss();
-        }
+    private void peticionEnviarCalificacion(){
 
         cerrarTeclado();
 
         progressBar.setVisibility(View.VISIBLE);
         compositeDisposable.add(
-                service.calificarOrden(ordenid, Math.round(estrellas), notas)
+                service.calificarOrden(ordenid, Math.round(estrellas), "")
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
                         .retry()
@@ -379,7 +323,9 @@ public class OrdenesEstadoActivasActivity extends AppCompatActivity {
         );
     }
 
-    void cerrarTeclado() {
+
+
+    private void cerrarTeclado() {
         View view = getCurrentFocus();
         if (view != null) {
             InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
@@ -387,13 +333,13 @@ public class OrdenesEstadoActivasActivity extends AppCompatActivity {
         }
     }
 
-    void verProductos(){
+    private void verProductos(){
         Intent res = new Intent(this, ProductosOrdenesActivity.class);
         res.putExtra("KEY_ORDEN", String.valueOf(ordenid));
         startActivity(res);
     }
 
-    void mensajeSinConexion(){
+    private void mensajeSinConexion(){
         progressBar.setVisibility(View.GONE);
         Toasty.info(this, getString(R.string.sin_conexion)).show();
     }

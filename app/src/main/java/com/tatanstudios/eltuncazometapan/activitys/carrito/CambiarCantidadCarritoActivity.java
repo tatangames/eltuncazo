@@ -274,6 +274,9 @@ public class CambiarCantidadCarritoActivity extends AppCompatActivity {
         }, 1);
     }
 
+    private boolean boolNotaReq = true;
+
+
     // cambiar la cantidad de producto y su nota
     private void peticionCambiarCantidad(){
         String nota = edtNota.getText().toString();
@@ -281,28 +284,36 @@ public class CambiarCantidadCarritoActivity extends AppCompatActivity {
         if(utiliza_nota == 1){
             if(TextUtils.isEmpty(nota)){
 
-                int colorVerdeSuccess = ContextCompat.getColor(this, R.color.verdeSuccess);
-                KAlertDialog pDialog = new KAlertDialog(this, KAlertDialog.WARNING_TYPE, false);
-                pDialog.getProgressHelper().setBarColor(colorVerdeSuccess);
+                if(boolNotaReq){
+                    boolNotaReq = false;
 
-                pDialog.setTitleText(getString(R.string.nota_requerida));
-                pDialog.setTitleTextGravity(Gravity.CENTER);
-                pDialog.setTitleTextSize(19);
-                pDialog.setContentText(notaproducto);
+                    new Handler().postDelayed(() -> {
+                        boolNotaReq = true;
+                    }, 1000);
 
-                pDialog.setContentTextAlignment(View.TEXT_ALIGNMENT_VIEW_START, Gravity.CENTER);
-                pDialog.setContentTextSize(17);
+                    int colorVerdeSuccess = ContextCompat.getColor(this, R.color.verdeSuccess);
+                    KAlertDialog pDialog = new KAlertDialog(this, KAlertDialog.WARNING_TYPE, false);
+                    pDialog.getProgressHelper().setBarColor(colorVerdeSuccess);
 
-                pDialog.setCancelable(false);
-                pDialog.setCanceledOnTouchOutside(false);
+                    pDialog.setTitleText(getString(R.string.nota_requerida));
+                    pDialog.setTitleTextGravity(Gravity.CENTER);
+                    pDialog.setTitleTextSize(19);
+                    pDialog.setContentText(notaproducto);
 
-                pDialog.confirmButtonColor(R.drawable.codigo_kalert_dialog_corners_confirmar);
-                pDialog.setConfirmClickListener(getString(R.string.aceptar), sDialog -> {
-                    sDialog.dismissWithAnimation();
+                    pDialog.setContentTextAlignment(View.TEXT_ALIGNMENT_CENTER, Gravity.CENTER);
+                    pDialog.setContentTextSize(17);
 
-                });
+                    pDialog.setCancelable(false);
+                    pDialog.setCanceledOnTouchOutside(false);
 
-                pDialog.show();
+                    pDialog.confirmButtonColor(R.drawable.codigo_kalert_dialog_corners_confirmar);
+                    pDialog.setConfirmClickListener(getString(R.string.aceptar), sDialog -> {
+                        sDialog.dismissWithAnimation();
+
+                    });
+
+                    pDialog.show();
+                }
 
                 return;
             }

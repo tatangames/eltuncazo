@@ -90,7 +90,7 @@ public class CarritoActivity extends AppCompatActivity {
             pDialog.setContentText(getString(R.string.para_eliminar));
             pDialog.setCustomImage(R.drawable.fingerswipe);
 
-            pDialog.setContentTextAlignment(View.TEXT_ALIGNMENT_VIEW_START, Gravity.CENTER);
+            pDialog.setContentTextAlignment(View.TEXT_ALIGNMENT_CENTER, Gravity.CENTER);
             pDialog.setContentTextSize(17);
 
             pDialog.setCancelable(false);
@@ -144,7 +144,7 @@ public class CarritoActivity extends AppCompatActivity {
                 pDialog.setTitleTextSize(19);
                 pDialog.setContentText(getString(R.string.producto_no_dispo_deslizar));
 
-                pDialog.setContentTextAlignment(View.TEXT_ALIGNMENT_VIEW_START, Gravity.CENTER);
+                pDialog.setContentTextAlignment(View.TEXT_ALIGNMENT_CENTER, Gravity.CENTER);
                 pDialog.setContentTextSize(17);
 
                 pDialog.setCancelable(false);
@@ -198,7 +198,7 @@ public class CarritoActivity extends AppCompatActivity {
             pDialog.setTitleTextSize(19);
             pDialog.setContentText(getString(R.string.porfavor_eliminarlo));
 
-            pDialog.setContentTextAlignment(View.TEXT_ALIGNMENT_VIEW_START, Gravity.CENTER);
+            pDialog.setContentTextAlignment(View.TEXT_ALIGNMENT_CENTER, Gravity.CENTER);
             pDialog.setContentTextSize(17);
 
             pDialog.setCancelable(false);

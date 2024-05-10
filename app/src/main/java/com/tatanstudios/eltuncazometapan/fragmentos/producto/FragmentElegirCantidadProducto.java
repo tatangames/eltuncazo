@@ -188,13 +188,6 @@ public class FragmentElegirCantidadProducto extends Fragment {
     }
 
 
-
-
-
-
-
-
-
     // solicitar informacion
     void peticionServidor(){
         progressBar.setVisibility(View.VISIBLE);
@@ -259,6 +252,8 @@ public class FragmentElegirCantidadProducto extends Fragment {
         );
     }
 
+    private boolean boolSeguroNota = true;
+
     void agregarProducto(){
 
         cerrarTeclado();
@@ -273,28 +268,36 @@ public class FragmentElegirCantidadProducto extends Fragment {
         if(utilizaNota== 1){
             if(TextUtils.isEmpty(notaProducto)) {
 
-                int colorVerdeSuccess = ContextCompat.getColor(getContext(), R.color.verdeSuccess);
-                KAlertDialog pDialog = new KAlertDialog(getContext(), KAlertDialog.WARNING_TYPE, false);
-                pDialog.getProgressHelper().setBarColor(colorVerdeSuccess);
+                if(boolSeguroNota){
+                    boolSeguroNota = false;
 
-                pDialog.setTitleText(getString(R.string.nota_requerida));
-                pDialog.setTitleTextGravity(Gravity.CENTER);
-                pDialog.setTitleTextSize(19);
-                pDialog.setContentText(usaNota);
+                    new Handler().postDelayed(() -> {
+                        boolSeguroNota = true;
+                    }, 1000);
 
-                pDialog.setContentTextAlignment(View.TEXT_ALIGNMENT_VIEW_START, Gravity.CENTER);
-                pDialog.setContentTextSize(17);
+                    int colorVerdeSuccess = ContextCompat.getColor(getContext(), R.color.verdeSuccess);
+                    KAlertDialog pDialog = new KAlertDialog(getContext(), KAlertDialog.WARNING_TYPE, false);
+                    pDialog.getProgressHelper().setBarColor(colorVerdeSuccess);
 
-                pDialog.setCancelable(false);
-                pDialog.setCanceledOnTouchOutside(false);
+                    pDialog.setTitleText(getString(R.string.nota_requerida));
+                    pDialog.setTitleTextGravity(Gravity.CENTER);
+                    pDialog.setTitleTextSize(19);
+                    pDialog.setContentText(usaNota);
 
-                pDialog.confirmButtonColor(R.drawable.codigo_kalert_dialog_corners_confirmar);
-                pDialog.setConfirmClickListener(getString(R.string.aceptar), sDialog -> {
-                    sDialog.dismissWithAnimation();
+                    pDialog.setContentTextAlignment(View.TEXT_ALIGNMENT_CENTER, Gravity.CENTER);
+                    pDialog.setContentTextSize(17);
 
-                });
+                    pDialog.setCancelable(false);
+                    pDialog.setCanceledOnTouchOutside(false);
 
-                pDialog.show();
+                    pDialog.confirmButtonColor(R.drawable.codigo_kalert_dialog_corners_confirmar);
+                    pDialog.setConfirmClickListener(getString(R.string.aceptar), sDialog -> {
+                        sDialog.dismissWithAnimation();
+
+                    });
+
+                    pDialog.show();
+                }
 
                 return;
             }
@@ -365,7 +368,7 @@ public class FragmentElegirCantidadProducto extends Fragment {
         pDialog.setTitleTextSize(19);
         pDialog.setContentText(getString(R.string.agregar_direccion_nueva));
 
-        pDialog.setContentTextAlignment(View.TEXT_ALIGNMENT_VIEW_START, Gravity.CENTER);
+        pDialog.setContentTextAlignment(View.TEXT_ALIGNMENT_CENTER, Gravity.CENTER);
         pDialog.setContentTextSize(17);
 
         pDialog.setCancelable(false);
@@ -395,7 +398,7 @@ public class FragmentElegirCantidadProducto extends Fragment {
         pDialog.setTitleTextSize(19);
         pDialog.setContentText(msj1);
 
-        pDialog.setContentTextAlignment(View.TEXT_ALIGNMENT_VIEW_START, Gravity.CENTER);
+        pDialog.setContentTextAlignment(View.TEXT_ALIGNMENT_CENTER, Gravity.CENTER);
         pDialog.setContentTextSize(17);
 
         pDialog.setCancelable(false);

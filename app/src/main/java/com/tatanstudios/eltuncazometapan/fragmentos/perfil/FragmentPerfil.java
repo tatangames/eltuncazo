@@ -135,7 +135,7 @@ public class FragmentPerfil extends Fragment {
         pDialog.setTitleTextGravity(Gravity.CENTER);
         pDialog.setTitleTextSize(19);
 
-        pDialog.setContentTextAlignment(View.TEXT_ALIGNMENT_VIEW_START, Gravity.CENTER);
+        pDialog.setContentTextAlignment(View.TEXT_ALIGNMENT_CENTER, Gravity.CENTER);
         pDialog.setContentTextSize(17);
         pDialog.setContentText("");
 
