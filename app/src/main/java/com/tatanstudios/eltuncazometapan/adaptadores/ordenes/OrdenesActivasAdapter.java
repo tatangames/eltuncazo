@@ -44,7 +44,7 @@ public class OrdenesActivasAdapter extends RecyclerView.Adapter<OrdenesActivasAd
         // id de la orden
         holder.txtOrdenNum.setText(modeloTipo.get(position).getId().toString());
         holder.txtDireccion.setText(modeloTipo.get(position).getDireccion());
-        holder.txtEstado.setText(modeloTipo.get(position).getDireccion());
+
 
 
         // total a pagar
