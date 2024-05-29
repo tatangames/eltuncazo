@@ -60,7 +60,6 @@ public class DireccionNuevoMapaActivity extends AppCompatActivity {
     private String puntoref = "";
     private String telefono = "";
 
-    private String idzona = "";
     private String latitud = "";
     private String longitud = "";
     private String latitudreal = "";
@@ -87,7 +86,7 @@ public class DireccionNuevoMapaActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         if (intent != null) {
-            idzona = intent.getStringExtra("KEY_ZONA");
+
             latitud = intent.getStringExtra("KEY_LATITUD");
             longitud = intent.getStringExtra("KEY_LONGITUD");
             latitudreal = intent.getStringExtra("KEY_LATITUDREAL");
@@ -179,7 +178,7 @@ public class DireccionNuevoMapaActivity extends AppCompatActivity {
             progressBar.setVisibility(View.VISIBLE);
             String idcliente = tokenManager.getToken().getId();
             compositeDisposable.add(
-                    service.registrarDireccion(idcliente, nombre, direccion, puntoref, idzona,
+                    service.registrarDireccion(idcliente, nombre, direccion, puntoref, "1",
                                     latitud, longitud, latitudreal, longitudreal, telefono)
                             .subscribeOn(Schedulers.io())
                             .observeOn(AndroidSchedulers.mainThread())

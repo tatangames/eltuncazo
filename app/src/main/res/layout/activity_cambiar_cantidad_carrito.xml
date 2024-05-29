@@ -3,6 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/root"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorBlanco">
@@ -79,6 +81,7 @@
                 android:textColor="@color/colorNegro"
                 android:textSize="17sp" />
 
+
             <EditText
                 android:id="@+id/edtNota"
                 android:layout_width="match_parent"
@@ -87,6 +90,7 @@
                 android:layout_marginEnd="10dp"
                 android:hint="Nota para este producto"
                 android:inputType="text"
+
                 android:maxLength="400"
                 android:paddingStart="8dp"
                 android:paddingEnd="8dp"

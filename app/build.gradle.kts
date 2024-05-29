@@ -10,8 +10,8 @@ android {
         applicationId = "com.tatanstudios.eltuncazometapan"
         minSdk = 25
         targetSdk = 34
-        versionCode = 8
-        versionName = "1.0.7"
+        versionCode = 10
+        versionName = "1.0.8"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -72,9 +72,9 @@ dependencies {
     implementation("com.github.TutorialsAndroid:progressx:v6.0.19") //required for kalertdialog lib
 
     // servicios de google maps
-    implementation("com.google.android.gms:play-services-maps:17.0.1")
+    /*implementation("com.google.android.gms:play-services-maps:17.0.1")
     implementation("com.google.maps.android:android-maps-utils:0.5+")
-    implementation("com.google.android.libraries.places:places:2.4.0")
+    implementation("com.google.android.libraries.places:places:2.4.0")*/
 
 
     // manejador de varias lineas de productos

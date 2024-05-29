@@ -2,14 +2,9 @@ package com.tatanstudios.eltuncazometapan.fragmentos.direcciones;
 
 import static android.content.Context.MODE_PRIVATE;
 
-import android.Manifest;
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.net.Uri;
 import android.os.Bundle;
-import android.provider.Settings;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,17 +12,13 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContracts;
-import androidx.annotation.NonNull;
-import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.tatanstudios.eltuncazometapan.R;
-import com.tatanstudios.eltuncazometapan.activitys.mapa.MapaActivity;
+import com.tatanstudios.eltuncazometapan.activitys.mapa.DireccionNuevoMapaActivity;
 import com.tatanstudios.eltuncazometapan.adaptadores.direccion.DireccionAdapter;
 import com.tatanstudios.eltuncazometapan.network.ApiService;
 import com.tatanstudios.eltuncazometapan.network.RetrofitBuilder;
@@ -50,10 +41,9 @@ public class FragmentListaDirecciones extends Fragment {
     private CompositeDisposable compositeDisposable = new CompositeDisposable();
     private DireccionAdapter adapter = new DireccionAdapter();
 
-    private static final String PERMISSION_LOCATION_FINE = Manifest.permission.ACCESS_FINE_LOCATION;
+    //private static final String PERMISSION_LOCATION_FINE = Manifest.permission.ACCESS_FINE_LOCATION;
 
-    private final int PERMISSION_REQ_CODE = 90;
-
+    //private final int PERMISSION_REQ_CODE = 90;
 
 
     @Override
@@ -89,7 +79,7 @@ public class FragmentListaDirecciones extends Fragment {
 
 
 
-    private void requestRuntimePermission(){
+    /*private void requestRuntimePermission(){
 
         if(ActivityCompat.checkSelfPermission(getContext(),PERMISSION_LOCATION_FINE) == PackageManager.PERMISSION_GRANTED){
 
@@ -139,9 +129,9 @@ public class FragmentListaDirecciones extends Fragment {
 
             builder.show();
         }
-    }
+    }*/
 
-    @Override
+   /* @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
 
@@ -174,7 +164,7 @@ public class FragmentListaDirecciones extends Fragment {
                 requestRuntimePermission();
             }
         }
-    }
+    }*/
 
     // recargar activity
     @Override
@@ -189,7 +179,17 @@ public class FragmentListaDirecciones extends Fragment {
 
     // ver si tengo permiso para GPS
     private void abrirMapa(){
-        requestRuntimePermission();
+     //   requestRuntimePermission();
+
+        String latitud = "14.331156326713462";
+        String longitud = "-89.44222535491967";
+
+        Intent i  = new Intent(getContext(), DireccionNuevoMapaActivity.class);
+        i.putExtra("KEY_LATITUD", latitud);
+        i.putExtra("KEY_LONGITUD", longitud);
+        i.putExtra("KEY_LATITUDREAL", latitud);
+        i.putExtra("KEY_LONGITUDREAL", longitud);
+        startActivity(i);
     }
 
     // obtener lista de direcciones

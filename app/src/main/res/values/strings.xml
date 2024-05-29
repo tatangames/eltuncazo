@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">El Tuncazo</string>
-    <string name="google_maps_api">AIzaSyBOh2QksmS_Y2RWiSOOKybmn3Q3xKzou04</string>
-    <string name="app_version">V. 1.0.5</string>
+    <string name="google_maps_api">xx</string>
+    <string name="app_version">V. 1.0.8</string>
 
     <string name="top_icon">TOP ICON</string>
     <string name="numero_telefonico">Número Telefónico</string>

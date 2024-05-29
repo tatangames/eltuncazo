@@ -1,12 +1,14 @@
 package com.tatanstudios.eltuncazometapan.activitys.carrito;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -271,7 +273,16 @@ public class CambiarCantidadCarritoActivity extends AppCompatActivity {
         new Handler().postDelayed(() -> {
             scroll.setVisibility(View.VISIBLE);
             scroll.fullScroll(ScrollView.FOCUS_UP);
+
         }, 1);
+    }
+
+    void cerrarTeclado() {
+        View view = getCurrentFocus();
+        if (view != null) {
+            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+        }
     }
 
     private boolean boolNotaReq = true;

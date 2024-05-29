@@ -71,7 +71,6 @@ public class FragmentElegirCantidadProducto extends Fragment {
 
     private float precio = 0;
 
-    private int cantidadAgregar = 1;
     private String notaProducto = "";
 
     private int utilizaNota = 0;
@@ -303,10 +302,12 @@ public class FragmentElegirCantidadProducto extends Fragment {
             }
         }
 
+
+
         progressBar.setVisibility(View.VISIBLE);
         String id = tokenManager.getToken().getId();
         compositeDisposable.add(
-                service.agregarCarritoTemporal(id, idproducto, cantidadAgregar, notaProducto)
+                service.agregarCarritoTemporal(id, idproducto, contadorProducto, notaProducto)
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
                         .retry()
@@ -407,7 +408,7 @@ public class FragmentElegirCantidadProducto extends Fragment {
         pDialog.confirmButtonColor(R.drawable.codigo_kalert_dialog_corners_confirmar);
         pDialog.setConfirmClickListener(getString(R.string.aceptar), sDialog -> {
             sDialog.dismissWithAnimation();
-            agregarDireccion();
+
         });
 
         pDialog.show();
